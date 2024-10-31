@@ -13,7 +13,7 @@ def view_expense():
         with open(FILE_DIRECTORY, 'r') as file:
             for line in file:
                 print(line.strip().split(","))
-    finally:
+    except:
          raise ValueError("File doesn't exit.")
 
 def total_expenses(category, start_date, end_date):
