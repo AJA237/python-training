@@ -9,10 +9,23 @@ def add_expense(expense_class):
             file.write(f"{expense_class.category},{expense_class.amount},{str(expense_class.date)}\n")
 
 def view_expense():
-    try:  
-        with open(FILE_DIRECTORY, 'r') as file:
-            for line in file:
-                print(line.strip().split(","))
+    try:
+          with open(FILE_DIRECTORY, 'r') as file:
+               
+               criteria = input("What criteria do you want to view? (category, month): ").lower()
+               for line in file:
+                    if (criteria == "category"):
+                         category = input("Enter category: ").lower()
+                         if category == line.strip().split(",")[0].lower():
+                              print(line.strip().split(","))
+                         else:
+                              print("No expenses found.")
+                    elif (criteria == "month"):
+                         month = input("Enter month (YYYY-MM): ")
+                         if month == line.strip().split(",")[2][:7]:
+                              print(line.strip().split(","))
+                         else:
+                              print("No expenses found.")
     except:
          raise ValueError("File doesn't exit.")
 
